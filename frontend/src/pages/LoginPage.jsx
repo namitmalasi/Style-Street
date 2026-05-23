@@ -1,8 +1,10 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login } = useAuthStore();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -13,7 +15,9 @@ const LoginPage = () => {
     e.preventDefault();
 
     const res = await login(formData);
-
+    if (res.success) {
+      navigate("/");
+    }
     console.log(res);
   };
 

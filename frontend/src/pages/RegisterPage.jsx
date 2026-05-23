@@ -1,8 +1,10 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const { register } = useAuthStore();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -14,6 +16,9 @@ const RegisterPage = () => {
     e.preventDefault();
 
     const res = await register(formData);
+    if (res.success) {
+      navigate("/");
+    }
 
     console.log(res);
   };
