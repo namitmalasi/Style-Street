@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   return (
@@ -32,6 +33,15 @@ function App() {
             <PublicRoute>
               <RegisterPage />
             </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/product/:id"
+          element={
+            <ProtectedRoute>
+              <ProductDetailsPage />
+            </ProtectedRoute>
           }
         />
       </Routes>
