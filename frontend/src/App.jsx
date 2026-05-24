@@ -7,6 +7,7 @@ import PublicRoute from "./routes/PublicRoute";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
 import SuccessPage from "./pages/SuccessPage";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   return (
@@ -61,6 +62,15 @@ function App() {
           element={
             <ProtectedRoute>
               <SuccessPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
             </ProtectedRoute>
           }
         />
