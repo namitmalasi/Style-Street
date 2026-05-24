@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import api from "../services/api";
-
 import Navbar from "../components/Navbar";
+import  useCartStore  from "../store/cartStore";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
+  const { addToCart } = useCartStore();
 
   const [product, setProduct] = useState(null);
 
@@ -33,6 +33,10 @@ const ProductDetailsPage = () => {
   if (!product) {
     return <p>Loading...</p>;
   }
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity, selectedSize);
+  };
 
   return (
     <div>
@@ -96,7 +100,10 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          <button className="w-full bg-black text-white py-4 rounded-xl text-lg cursor-pointer">
+          <button
+            className="w-full bg-black text-white py-4 rounded-xl text-lg cursor-pointer"
+            onClick={handleAddToCart}
+          >
             Add To Cart
           </button>
         </div>

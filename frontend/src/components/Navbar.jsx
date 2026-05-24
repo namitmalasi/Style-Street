@@ -1,8 +1,12 @@
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
+import useCartStore from "../store/cartStore";
 
 const Navbar = () => {
   const { user, logout } = useAuthStore();
+  const { cartItems } = useCartStore();
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -16,6 +20,16 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         <span>{user?.name}</span>
+
+        <button onClick={() => navigate("/cart")} className="relative">
+          <ShoppingCart />
+
+          {cartItems.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              {cartItems.length}
+            </span>
+          )}
+        </button>
 
         <button
           onClick={handleLogout}
