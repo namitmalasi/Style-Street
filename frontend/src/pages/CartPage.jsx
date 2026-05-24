@@ -1,10 +1,22 @@
 import Navbar from "../components/Navbar";
-
+import api from "../services/api";
 import useCartStore from "../store/cartStore";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal } =
     useCartStore();
+
+  const handleCheckout = async () => {
+    try {
+      const res = await api.post("/payments/create-checkout-session", {
+        products: cartItems,
+      });
+
+      window.location.href = res.data.url;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -82,7 +94,10 @@ const CartPage = () => {
                 <span className="font-bold">₹{getCartTotal()}</span>
               </div>
 
-              <button className="w-full bg-black text-white py-4 rounded-xl">
+              <button
+                className="w-full bg-black text-white py-4 rounded-xl cursor-pointer"
+                onClick={handleCheckout}
+              >
                 Proceed To Checkout
               </button>
             </div>
