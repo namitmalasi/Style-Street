@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import api from "../services/api";
 import useCartStore from "../store/cartStore";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal } =
@@ -75,7 +76,10 @@ const CartPage = () => {
                     </div>
 
                     <button
-                      onClick={() => removeFromCart(item._id, item.size)}
+                      onClick={() => {
+                        removeFromCart(item._id, item.size);
+                        toast.success("Item removed");
+                      }}
                       className="text-red-500 mt-4"
                     >
                       Remove

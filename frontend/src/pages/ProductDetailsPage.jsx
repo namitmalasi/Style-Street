@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import Navbar from "../components/Navbar";
-import  useCartStore  from "../store/cartStore";
+import useCartStore from "../store/cartStore";
+import toast from "react-hot-toast";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const ProductDetailsPage = () => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedSize);
+    toast.success("Added to cart");
   };
 
   return (

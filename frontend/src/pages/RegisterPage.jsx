@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const { register } = useAuthStore();
@@ -17,10 +18,11 @@ const RegisterPage = () => {
 
     const res = await register(formData);
     if (res.success) {
+      toast.success("Account created successfully");
       navigate("/");
+    } else {
+      toast.error(res.message);
     }
-
-    console.log(res);
   };
 
   return (

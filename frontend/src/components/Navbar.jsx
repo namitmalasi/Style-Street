@@ -2,7 +2,8 @@ import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import useCartStore from "../store/cartStore";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logout } = useAuthStore();
@@ -12,18 +13,21 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await logout();
+    toast.success("Logged out");
     navigate("/login");
   };
 
   return (
     <nav className="flex items-center justify-between p-4 border-b">
-    <Link to="/">
-      <h1 className="text-2xl font-bold cursor-pointer">StyleStreet</h1>
-</Link>
+      <Link to="/">
+        <h1 className="text-2xl font-bold cursor-pointer">StyleStreet</h1>
+      </Link>
       <div className="flex items-center gap-4">
         <span>{user?.name}</span>
 
-        <button className="cursor-pointer" onClick={() => navigate("/orders")}>Orders</button>
+        <button className="cursor-pointer" onClick={() => navigate("/orders")}>
+          Orders
+        </button>
 
         <button onClick={() => navigate("/cart")} className="relative">
           <ShoppingCart />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const { login } = useAuthStore();
@@ -16,9 +17,12 @@ const LoginPage = () => {
 
     const res = await login(formData);
     if (res.success) {
+      toast.success("Login successful");
+
       navigate("/");
+    } else {
+      toast.error(res.message);
     }
-    console.log(res);
   };
 
   return (
