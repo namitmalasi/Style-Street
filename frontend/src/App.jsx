@@ -8,8 +8,15 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
 import SuccessPage from "./pages/SuccessPage";
 import OrdersPage from "./pages/OrdersPage";
+import { useEffect } from "react";
+import useAuthStore from "./store/authStore";
 
 function App() {
+  const { checkAuth } = useAuthStore();
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

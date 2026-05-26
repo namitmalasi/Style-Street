@@ -15,6 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
 const allowedOrigins = [
   "https://style-street-1.onrender.com",
   "http://localhost:5173",

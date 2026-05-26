@@ -66,10 +66,12 @@ const useAuthStore = create(
 
           set({
             user: res.data,
+            isAuthenticated: true,
           });
         } catch (error) {
           set({
             user: null,
+            isAuthenticated: false,
           });
         }
       },
