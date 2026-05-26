@@ -64,5 +64,3 @@ The application provides a complete online shopping experience with secure authe
 - Mongoose
 - JWT Authentication
 - Stripe API
-
----

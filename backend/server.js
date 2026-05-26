@@ -13,14 +13,25 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+app.use(cookieParser());
+const allowedOrigins = [
+  "https://style-street-1.onrender.com",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked by policy: ${origin}`));
+      }
+    },
     credentials: true,
   }),
 );
-app.use(express.json());
-app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
