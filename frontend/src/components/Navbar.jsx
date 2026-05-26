@@ -18,33 +18,47 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 border-b">
-      <Link to="/">
-        <h1 className="text-2xl font-bold cursor-pointer">StyleStreet</h1>
-      </Link>
-      <div className="flex items-center gap-4">
-        <span>{user?.name}</span>
-
-        <button className="cursor-pointer" onClick={() => navigate("/orders")}>
-          Orders
-        </button>
-
-        <button onClick={() => navigate("/cart")} className="relative">
-          <ShoppingCart />
-
-          {cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              {cartItems.length}
-            </span>
-          )}
-        </button>
-
-        <button
-          onClick={handleLogout}
-          className="bg-black text-white px-4 py-2 rounded"
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <h1
+          onClick={() => navigate("/")}
+          className="text-2xl font-black tracking-tight cursor-pointer"
         >
-          Logout
-        </button>
+          StyleStreet
+        </h1>
+
+        <div className="flex items-center gap-6">
+          <button
+            onClick={() => navigate("/orders")}
+            className="font-medium hover:text-gray-500"
+          >
+            Orders
+          </button>
+
+          <button
+            onClick={() => navigate("/cart")}
+            className="relative cursor-pointer"
+          >
+            <ShoppingCart size={22} />
+
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            )}
+          </button>
+
+          <span className="hidden sm:block text-sm text-gray-500">
+            {user?.name}
+          </span>
+
+          <button
+            onClick={handleLogout}
+            className="bg-black text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 cursor-pointer"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
   );
